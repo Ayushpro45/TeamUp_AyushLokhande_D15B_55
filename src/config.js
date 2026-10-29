@@ -5,10 +5,18 @@ const HOSTNAME =
     ? window.location.hostname
     : 'localhost';
 
-// When deployed on Vercel, VITE_API_URL points to the Render backend (e.g. https://your-backend.onrender.com)
-// In local development, it defaults to http://localhost:5001
+const isProduction =
+  typeof window !== 'undefined' &&
+  window.location.hostname &&
+  window.location.hostname !== 'localhost' &&
+  window.location.hostname !== '127.0.0.1';
+
+// In production (Render or Vercel), use the live Render backend URL
+// In local development, fall back to http://localhost:5001
 export const BACKEND_URL = envApiUrl
   ? envApiUrl.replace(/\/$/, '')
+  : isProduction
+  ? 'https://teamup-ayushlokhande-d15b-55.onrender.com'
   : `http://${HOSTNAME}:5001`;
 
 export const API_BASE = `${BACKEND_URL}/api`;

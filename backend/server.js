@@ -185,7 +185,8 @@ app.use(
       if (
         !origin ||
         allowedOrigins.includes(origin) ||
-        origin.endsWith(".vercel.app")
+        origin.endsWith(".vercel.app") ||
+        origin.endsWith(".onrender.com")
       ) {
         callback(null, true);
       } else {
